@@ -1,0 +1,30 @@
+﻿@use '~@angular/material' as mat;
+@include mat.core();
+
+//$default-typography: mat.define-typography-config(
+//  $font-family: sans-serif
+//);
+//@include mat.all-component-typographies($default-typography);
+
+//todo
+$primary: (
+  100: #78bf8f,
+  contrast: ()
+);
+
+$accent: (
+  100: #c5cae9,
+  contrast: ()
+);
+
+$warn: (
+  100: #c5cae9,
+  contrast: ()
+);
+
+$app-primary: mat.define-palette($primary, 100);
+$app-accent: mat.define-palette($accent, 100);
+$app-warn: mat.define-palette($warn, 100);
+$app-theme: mat.define-light-theme($app-primary, $app-accent, $app-warn);
+
+@include mat.all-component-themes($app-theme);
