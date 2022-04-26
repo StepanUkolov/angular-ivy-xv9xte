@@ -9,7 +9,7 @@
     </div>
     <div>
 
-      <p>Pay the application within  <br /><countdown [config]="{leftTime: timer}" (event)="timerComplete($event)"></countdown> </p>
+      <p>Pay the application within  <br /><countdown [config]="{leftTime: timer}" (event)="timerComplete($any($event))"></countdown> </p>
     </div>
     <div>
       <p>Make a transfer by details</p>

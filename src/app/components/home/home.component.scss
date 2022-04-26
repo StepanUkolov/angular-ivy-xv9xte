@@ -32,7 +32,7 @@
   margin:10px auto;
 }
 
-.give-div img, .receive-div img, {
+.give-div img, .receive-div img {
   width: 50px;
   position: absolute;
   margin: 5px;
@@ -59,7 +59,6 @@
     font-weight:bold;
     font-size:50px;
 }
-.description-text{}
 
 .form-box {
   border: 0.5px solid #e5eaff;
@@ -102,10 +101,6 @@
   width: 40px !important;
 }
 
-
-.input-div {
-  // margin:0 auto;
-}
 
 button{
     outline:none;

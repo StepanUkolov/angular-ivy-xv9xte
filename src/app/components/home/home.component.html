@@ -26,7 +26,7 @@
 
           <br />
           <div class="select-div">
-            <mat-form-field class="select" appearance="">
+            <mat-form-field class="select">
               <mat-select formControlName="giveType">
                 <mat-option (click)="selectGive('btc','BTC')" value="btc">BTC</mat-option>
                 <mat-option (click)="selectGive('eth','ETH')" value="eth">ETH</mat-option>
@@ -61,7 +61,7 @@
           </div>
           <br />
           <div class="select-div">
-            <mat-form-field class="select" appearance="">
+            <mat-form-field class="select">
               <mat-select formControlName="receiveType">
                 <mat-option (click)="selectReceive('btc','BTC')" value="btc">BTC</mat-option>
                 <mat-option (click)="selectReceive('eth','ETH')" value="eth">ETH</mat-option>
@@ -80,7 +80,7 @@
         </div>
 
         <div class="input-div">
-          <input disabled class="inputWithBtn inputValues" type="number" formControlName="receive" placeholder="Receive amount" required />
+          <input [disabled]="true" class="inputWithBtn inputValues" type="number" formControlName="receive" placeholder="Receive amount" required />
           <mat-error *ngIf="form.get('receive').errors?.required && form.get('receive').touched">{{error.required}}</mat-error>
           <mat-error *ngIf="form.get('receive').errors?.pattern && form.get('receive').touched">{{error.onlyPositive}}</mat-error>
           <mat-error *ngIf="form.get('receive').errors?.min && form.get('receive').touched">{{error.min(minSumm)}}</mat-error>

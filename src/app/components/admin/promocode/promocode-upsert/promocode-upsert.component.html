@@ -8,7 +8,7 @@
       <mat-error *ngIf="form.get('code')?.touched
                && form.get('code').errors?.required">{{ValidationMessages.requiredField('Code ')}}</mat-error>
       <mat-error *ngIf="form.get('code').errors?.serverError">{{form.get('code').errors.message}}</mat-error>
-      <mat-error *ngIf="form.get('code').errors?.maxlength">{{ValidationMessages.maxLength('30')}}</mat-error>
+      <mat-error *ngIf="form.get('code').errors?.maxlength">{{ValidationMessages.maxLength(30)}}</mat-error>
 
       <!--bonus-->
       <input class="inputField" matInput formControlName="bonus" placeholder="Bonus">
