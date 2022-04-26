@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { RoleGuard } from "src/app/providers/guards/role.guard";
+import { RoleGuard } from "../../../app/providers/guards/role.guard";
 import { SignInComponent } from "./sign-in/sign-in.component";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { ApplicationRole } from "../../core/constants/application-role.constant";
 import { AccountComponent } from "./account/account.component";
-import { AuthorizeGuard } from "src/app/providers/guards/authorize.guard";
+import { AuthorizeGuard } from "../../../app/providers/guards/authorize.guard";
 import { MatDialogRef } from "@angular/material/dialog";
 
 export const routes: Routes = [

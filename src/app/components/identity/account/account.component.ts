@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { IdentityService } from "src/app/providers/services/identity.service";
+import { IdentityService } from "../../../../app/providers/services/identity.service";
 import { Observable } from "rxjs";
 import { IdentityClient } from "../../../web-api-client";
 

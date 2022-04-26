@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 import {Router} from "@angular/router";
-import {IdentityService} from "src/app/providers/services/identity.service";
+import {IdentityService} from "../../../../app/providers/services/identity.service";
 import {AuthResponse} from "../../../web-api-client";
 import {
   IdentityClient,

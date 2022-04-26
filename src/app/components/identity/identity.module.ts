@@ -11,8 +11,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatNativeDateModule } from "@angular/material/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { SignInComponent } from "./sign-in/sign-in.component";
-import { MaterialModules } from "src/app/material.module";
-import { IdentityService } from "src/app/providers/services/identity.service";
+import { MaterialModules } from "../../../app/material.module";
+import { IdentityService } from "../../../app/providers/services/identity.service";
 import { AccountComponent } from "./account/account.component";
 
 @NgModule({

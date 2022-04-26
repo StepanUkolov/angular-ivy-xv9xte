@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { Router } from "@angular/router";
-import { IdentityService } from "src/app/providers/services/identity.service";
-import { AuthResponse, GeneralSettingClient, GeneralSettingDTO, IdentityClient } from "src/app/web-api-client";
+import { IdentityService } from "../../../app/providers/services/identity.service";
+import { AuthResponse, GeneralSettingClient, GeneralSettingDTO, IdentityClient } from "../../../app/web-api-client";
 import { AuthorizeGuard } from "../../providers/guards/authorize.guard";
 import { SignInComponent } from "../identity/sign-in/sign-in.component";
 import { SignUpComponent } from "../identity/sign-up/sign-up.component";

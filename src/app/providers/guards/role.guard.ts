@@ -12,7 +12,7 @@ import {
   UrlSegment,
 } from "@angular/router";
 import { BehaviorSubject, empty, Observable } from "rxjs";
-import { IdentityClient } from "src/app/web-api-client";
+import { IdentityClient } from "../../../app/web-api-client";
 import { IdentityService } from "../services/identity.service";
 
 @Injectable({ providedIn: "root" })
