@@ -1,0 +1,51 @@
+@import 'variables';
+
+
+
+.logo_text {
+  font-family: Mountains of Christmas;
+  font-size: 39px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 54px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFAE5;
+}
+.logo_img{
+    width:39px;
+}
+
+.nav-items {
+  margin: 5px;
+  display: flex;
+  list-style: none;
+}
+
+.nav-items li {
+  margin-left: 25px;
+
+ /* a:hover {
+    cursor: pointer;
+    color: #F6A700;
+  }*/
+}
+
+.nav-items li a {
+  color: black;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.navStyle {
+  background-color: #e3e9ff;
+  font-family: Montserrat;
+}
+
+.navbar-nav > li :hover {
+  color: #FFFAE5;
+}
+
+li > a{
+  cursor: pointer;
+}

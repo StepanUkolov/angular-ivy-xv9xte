@@ -1,0 +1,28 @@
+.container{
+  text-align:center;
+}
+
+.title{
+  font-weight:bold;
+}
+
+.btn-submit {
+width: 100%;
+background-color: #00c86c;
+color: white;
+margin-top: 30px;
+padding:10px 0;
+}
+
+
+hr {
+border-color: #F6A700;
+}
+.rememberMe{
+  float:left;
+}
+
+
+.rememberMe:checked:before {
+background-color: #F6A700;
+}

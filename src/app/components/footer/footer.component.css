@@ -1,0 +1,35 @@
+.main-div{
+  padding:20px;
+}
+
+.links > div{
+  margin:5px 20px;
+}
+
+h3 {
+font-weight: bold;
+color: #F6A700;
+}
+
+
+.link:hover{
+color: #F6A700;
+cursor:pointer;
+}
+
+
+.logo{
+  font-size:35px;
+}
+.bit {
+color: white;
+}
+
+.trade {
+color: #F6A700;
+}
+
+.description {
+color: #7E808A;
+font-size:10px;
+}

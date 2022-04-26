@@ -1,0 +1,31 @@
+<div class="all-center">
+<div class="mx-auto main">
+  <h3 class="mb-4">Create new promocode</h3>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="d-flex flex-column">
+      <!--promo code-->
+      <input class="inputField" matInput formControlName="code" placeholder="Code">
+      <mat-error *ngIf="form.get('code')?.touched
+               && form.get('code').errors?.required">{{ValidationMessages.requiredField('Code ')}}</mat-error>
+      <mat-error *ngIf="form.get('code').errors?.serverError">{{form.get('code').errors.message}}</mat-error>
+      <mat-error *ngIf="form.get('code').errors?.maxlength">{{ValidationMessages.maxLength('30')}}</mat-error>
+
+      <!--bonus-->
+      <input class="inputField" matInput formControlName="bonus" placeholder="Bonus">
+      <mat-error *ngIf="form.get('bonus')?.touched
+               && form.get('bonus').errors?.required">{{ValidationMessages.requiredField('Bonus ')}}</mat-error>
+      <mat-error *ngIf="form.get('bonus').errors?.pattern">{{ValidationMessages.onlyPositiveDigits}}</mat-error>
+
+
+
+      <!--active from-->
+      <input class="inputField" matInput formControlName="activeFrom" placeholder="Active from">
+      <mat-error *ngIf="form.get('activeFrom')?.touched
+               && form.get('activeFrom').errors?.required">{{ValidationMessages.requiredField('Active from')}}</mat-error>
+      <mat-error *ngIf="form.get('activeFrom').errors?.pattern">{{ValidationMessages.onlyPositiveDigits}}</mat-error>
+      <button class="succesBtn" mat-raised-button type="submit" [disabled]="this.submitted">Create</button>
+
+    </div>
+  </form>
+</div>
+</div>

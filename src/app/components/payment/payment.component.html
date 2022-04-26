@@ -1,0 +1,52 @@
+
+<div class="d-flex justify-content-center">
+<div class="bg-img"></div>
+
+<div class="bg-form">
+  <div class="all">
+    <div>
+      <p>To complete the exchange operation, complete the following steps:</p>
+    </div>
+    <div>
+
+      <p>Pay the application within  <br /><countdown [config]="{leftTime: timer}" (event)="timerComplete($event)"></countdown> </p>
+    </div>
+    <div>
+      <p>Make a transfer by details</p>
+    </div>
+    <qr-code [value]="wallet"></qr-code>
+
+
+    <div class="fieldBtn">
+      <div><p><span class="cType">Wallet:</span> {{wallet}}</p></div>
+      <div class="btnDiv"><button class="copyBtn" (click)="copyWallet()">Copy</button></div>
+    </div>
+
+    <div class="fieldBtn">
+      <div>
+        <p><span class="cType">Amount:</span> {{amount}}</p>
+      </div>
+      <div class="btnDiv"><button class="copyBtn" (click)="copyAmount()">Copy</button></div>
+    </div>
+
+    <div>
+      <p class="check">Payment is checked automatically</p>
+    </div>
+
+
+    <div class="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+

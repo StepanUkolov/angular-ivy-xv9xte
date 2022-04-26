@@ -1,0 +1,23 @@
+.all{
+  margin:3vh auto;
+  font-size:15px;
+  padding:30px 60px;
+  width:100%;
+  align-items:center;
+}
+.p{
+  width:50%;
+  margin:10vh auto;
+}
+h1 {
+text-align:center;
+}
+@media only screen and (max-width: 600px) {
+.p {
+  width: 100%;
+  padding: 10px;
+}
+.all{
+  padding:10px;
+}
+}

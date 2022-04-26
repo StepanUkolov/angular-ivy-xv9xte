@@ -1,0 +1,12 @@
+.mat-button {
+  margin-right: 15px;
+}
+
+.mat-raised-button {
+  color: white;
+  background-color: #05ba4f;
+}
+
+button {
+  text-transform: uppercase;
+}

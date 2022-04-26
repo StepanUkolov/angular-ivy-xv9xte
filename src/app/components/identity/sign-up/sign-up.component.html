@@ -1,0 +1,42 @@
+<div class="container">
+<form action="" class="form" [formGroup]="form" novalidate (ngSubmit)="onSubmit(formEmail.value, formPassword.value, formPasswordConfirm.value)">
+  <h1 class="title">Create Account</h1>
+  <hr />
+
+  <div class="d-flex">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label class="label">First name</mat-label>
+      <input matInput type="text" name="firstName" formControlName="firstName" #formEmail required>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label class="label">Last name</mat-label>
+      <input matInput type="text" name="lastName" formControlName="lastName" #formEmail required>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label class="label">Email</mat-label>
+    <input matInput type="email" name="email" formControlName="email" #formEmail required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label class="label">Password</mat-label>
+    <input matInput type="password" name="password" formControlName="password" #formPassword required>
+    <mat-icon class="icon-showPassword" matSuffix>remove_red_eye</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label class="label">Confirm Password</mat-label>
+    <input matInput type="password" name="passwordConfirm" formControlName="confirmPassword" #formPasswordConfirm required>
+    <mat-icon class="icon-showPassword" matSuffix>remove_red_eye</mat-icon>
+  </mat-form-field>
+
+
+  <mat-checkbox formControlName="allowTerms" class="allowTerms">I certify that I am 18 years of age or older, and agree to the User <br /> Agreement and Privacy Policy. </mat-checkbox> <br />
+
+  <button type="submit" class="btn-submit" mat-raised-button color="primary">Sign Up</button>
+</form>
+</div>
+
+
+

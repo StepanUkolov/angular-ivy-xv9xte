@@ -1,0 +1,16 @@
+<div class="mx-auto main">
+<h3 class="mb-4">Update wallet</h3>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="d-flex flex-column">
+    <!--wallet-->
+    <input class="inputField" matInput formControlName="wallet" placeholder="Wallet">
+    <mat-error *ngIf="form.get('wallet')?.touched
+               && form.get('wallet').errors?.required">{{ValidationMessages.requiredField('Wallet ')}}</mat-error>
+    <mat-error *ngIf="form.get('wallet').errors?.serverError">{{form.get('wallet').errors.message}}</mat-error>
+
+    
+    <button class="succesBtn" mat-raised-button type="submit" [disabled]="this.submitted">Update</button>
+
+  </div>
+</form>
+</div>

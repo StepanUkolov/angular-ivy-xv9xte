@@ -1,0 +1,34 @@
+<div class="all-center">
+<div class="mx-auto main">
+  <h3 class="mb-4">Update site settings</h3>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="d-flex flex-column">
+      <!--wallet-->
+      <label>Service tax</label>
+      <input type="number" class="inputField" matInput formControlName="tax" [(ngModel)]="taxValue">
+      <mat-error *ngIf="form.get('tax')?.touched
+                 && form.get('tax').errors?.required">{{ValidationMessages.requiredField('Tax ')}}</mat-error>
+
+    <label>Min summ for exchange</label>
+      <input type="number" class="inputField" matInput formControlName="minSumm" [(ngModel)]="minSummValue">
+      <mat-error *ngIf="form.get('minSumm')?.touched
+                 && form.get('minSumm').errors?.required">{{ValidationMessages.requiredField('Min Summ ')}}</mat-error>
+
+    <label>Max summ for exchange</label>
+      <input type="number" class="inputField" matInput formControlName="maxSumm" [(ngModel)]="maxSummValue">
+      <mat-error *ngIf="form.get('maxSumm')?.touched
+                 && form.get('maxSumm').errors?.required">{{ValidationMessages.requiredField('Max Summ ')}}</mat-error>
+
+
+    <label>Site name</label>
+      <input class="inputField" matInput formControlName="siteName" [(ngModel)]="siteNameValue">
+     <mat-error *ngIf="form.get('siteName')?.touched
+                 && form.get('siteName').errors?.required">{{ValidationMessages.requiredField('Site Name ')}}</mat-error>
+    
+
+
+      <button class="succesBtn" mat-raised-button type="submit">Save</button>
+
+    </div>
+  </form>
+</div>

@@ -1,0 +1,19 @@
+<div class="container">
+<form action="" class="form" [formGroup]="form" novalidate (ngSubmit)="submit()">
+    <h1 class="title">Sign In</h1>
+
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label class="label">Email</mat-label>
+        <input matInput type="email" name="email" formControlName="email" required>
+    </mat-form-field> <br />
+
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label class="label">Password</mat-label>
+        <input matInput type="password" name="password" formControlName="password" required>
+    </mat-form-field><br />
+
+     <!--<mat-checkbox formControlName="rememberMe" class="rememberMe">Keep me signed in on this computer</mat-checkbox> <br />-->
+
+    <button type="submit" class="btn-submit" mat-raised-button >Sign In</button>
+</form>
+</div>

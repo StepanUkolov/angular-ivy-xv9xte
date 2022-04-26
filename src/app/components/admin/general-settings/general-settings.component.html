@@ -1,0 +1,35 @@
+<div class="mx-auto main">
+<h3 class="mb-4">Update general settings</h3>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="d-flex flex-column">
+    <!--max value-->
+    <input class="inputField" matInput formControlName="maxValue" placeholder="Max value">
+    <mat-error *ngIf="form.get('maxValue')?.touched
+               && form.get('maxValue').errors?.required">{{ValidationMessages.requiredField('Max value ')}}</mat-error>
+    <mat-error *ngIf="form.get('maxValue').errors?.serverError">{{form.get('maxValue').errors.message}}</mat-error>
+
+    <!--max value-->
+    <input class="inputField" matInput formControlName="minValue" placeholder="Min value">
+    <mat-error *ngIf="form.get('minValue')?.touched
+               && form.get('minValue').errors?.required">{{ValidationMessages.requiredField('Min value ')}}</mat-error>
+    <mat-error *ngIf="form.get('minValue').errors?.serverError">{{form.get('minValue').errors.message}}</mat-error>
+
+    <!--exchange percentage-->
+    <input class="inputField" matInput formControlName="exchangePercentage" placeholder="Exchange percentage">
+    <mat-error *ngIf="form.get('exchangePercentage')?.touched
+               && form.get('exchangePercentage').errors?.required">{{ValidationMessages.requiredField('Exchange percentage ')}}</mat-error>
+    <mat-error *ngIf="form.get('exchangePercentage').errors?.serverError">{{form.get('exchangePercentage').errors.message}}</mat-error>
+
+
+
+    <!--site name-->
+    <input class="inputField" matInput formControlName="siteName" placeholder="Site name">
+    <mat-error *ngIf="form.get('siteName')?.touched
+               && form.get('siteName').errors?.required">{{ValidationMessages.requiredField('Site name')}}</mat-error>
+    <mat-error *ngIf="form.get('siteName').errors?.serverError">{{form.get('siteName').errors.message}}</mat-error>
+
+    <button class="succesBtn" mat-raised-button type="submit" [disabled]="this.submitted">Create</button>
+
+  </div>
+</form>
+</div>

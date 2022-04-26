@@ -1,0 +1,42 @@
+<div class="all-center">
+<table mat-table [dataSource]="adminWallets" class="w-100">
+  <ng-container matColumnDef="index">
+    <tr>
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+    </tr>
+  </ng-container>
+  <ng-container matColumnDef="walletType">
+    <tr>
+      <th mat-header-cell *matHeaderCellDef> Wallet Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.walletType}} </td>
+    </tr>
+  </ng-container>
+  <ng-container matColumnDef="wallet">
+    <tr>
+      <th mat-header-cell *matHeaderCellDef> Wallet </th>
+      <td mat-cell *matCellDef="let element"><div class="walletDiv">{{element.wallet}}</div></td>
+    </tr>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <tr>
+      <th mat-header-cell *matHeaderCellDef> Edit </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button
+                (click)="upd(element.id)">
+          <mat-icon aria-hidden="false" style="color:skyblue
+">edit</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[10, 20, 50]"
+               showFirstLastButtons
+               aria-label="Select page of periodic elements">
+</mat-paginator>
+
+</div>

@@ -1,0 +1,32 @@
+.container {
+  text-align: center;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.btn-submit {
+  width: 100%;
+  background-color: #F6A700;
+  color: white;
+  margin-top: 30px;
+}
+
+
+hr {
+  border-color: #F6A700;
+}
+
+.allowTerms {
+  float: left;
+  text-align:left;
+}
+
+mat-form-field {
+  margin: 5px;
+}
+
+.allowTerms:checked:before {
+  background-color: #F6A700;
+}

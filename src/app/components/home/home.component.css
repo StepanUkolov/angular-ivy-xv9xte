@@ -1,0 +1,424 @@
+
+.form-div {
+  width: 50%;
+  height:50vh;
+  border: 2px solid red;
+}
+
+.text{
+    display:none;
+}
+.back-image {
+  text-align: center;
+  width: 50%;
+  height: 50vh;
+  
+}
+
+.bg-div {
+  
+  width: 100%;
+  height:70%;
+  min-height:600px;
+  border: 2px solid green;
+  background: url('../../../assets/icons/bg2.png') no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.form-box > div {
+  border: 1px solid;
+  width:90%;
+  margin:10px auto;
+}
+
+.give-div img, .receive-div img {
+  width: 50px;
+  position: absolute;
+  margin: 5px;
+}
+
+.give-div, .receive-div {
+  border-radius:48px;
+  height:30%;
+  background-color: rgba(227, 232, 255, 0.2);
+  padding:20px;
+}
+.wallet-div, .promo-div,.email-div {
+  background-color: rgba(227, 232, 255, 0.2);
+  padding: 5px;
+  border-radius:38px;
+}
+
+.main-text, .description-text {
+  color: #0038E7;
+} 
+
+.main-text {
+    margin-top:15%;
+    font-weight:bold;
+    font-size:50px;
+}
+
+.form-box {
+  border: 0.5px solid #e5eaff;
+  width: 60%;
+  height: 50%;
+  margin: 15% auto;
+  border-radius: 40px;
+  box-shadow: 4px 6px 68px -5px rgba(201, 205, 255);
+  padding: 20px;
+}
+.select{
+    margin:7px;
+}
+
+.img-and-select{
+    align-items:center;
+}
+.img-div, .select-div {
+  width: 50px;
+  margin:0 auto;
+}
+
+
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+::ng-deep .mat-select-value {
+  width: 0 !important;
+  overflow: hidden !important;
+}
+::ng-deep .mat-select{
+    width:0 !important;
+}
+
+::ng-deep .mat-form-field-infix {
+    width:0 !important;
+}
+::ng-deep .mat-select-arrow {
+  width: 40px !important;
+}
+
+
+.input-div {
+   margin:0 auto;
+}
+
+button{
+    outline:none;
+}
+
+.inputValues {
+  background: #F9FAFF;
+   border: none;
+  box-sizing: border-box;
+  border-radius: 10px;
+  outline: none;
+  padding: 15px;
+  width: 100%;
+
+}
+.inputWithBtn {
+  border: 1px solid rgba(45, 104, 251, 0.26);
+}
+
+.promo-input {
+  border-radius: 38px;
+  width: 70%;
+  padding: 20px;
+}
+.promo-button {
+  padding: 20px;
+  border: none;
+  border-radius: 38px;
+  width: 30%;
+  background-color: #FFD166;
+  color: #2D68FB;
+  font-size:12px;
+}
+
+.promo-div {
+    
+  padding:0;
+  display: flex;
+  flex-direction: row;
+}
+.submit-button {
+  border: none;
+  width: 100%;
+  padding: 20px;
+  border-radius: 38px;
+  background-color: #00C86C;
+  color:white;
+}
+
+.aggree{
+    font-size:13px;
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+
+  .bg-div{
+      background:none;
+  }
+  .back-image{
+      display:none;
+  }
+
+  .form-div{
+      width:100%;      
+  }
+  .form-box{
+      width:100%;
+      border:none;
+      box-shadow:none;
+  }
+  .aggree {
+    font-size: 10px;
+  }
+  .promo-button {
+      font-size:10px;
+  }
+  .text{
+      display:block;
+      text-align:center;
+  }
+
+  .main-text {
+    margin-top: 15%;
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .description-text {
+    font-size: 15px;
+  }
+  }
+
+  /*.bg-form {
+  width: 90%;
+  height:100vh;
+  background: url('../../../assets/bg/exchange-left.png') left no-repeat,url('../../../assets/bg/exchange-right.png') right no-repeat;
+  background-size: 35%;
+  padding:30px 0;
+  margin:0 auto;
+}*/
+  /*.all {
+  //border: 1px solid red;
+  border-radius: 20px;
+  width: 45%;
+  margin: 5vh auto;
+  background-color: white;
+  box-shadow: 0 0 70px #ccc;
+  padding: 40px;
+}
+
+.info_div{
+    text-align:center;
+    font-size:25px;
+}*/
+  /*#bg {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../assets/bg/exchange-left.png') left no-repeat,url('../../../assets/bg/exchange-right.png') right no-repeat;
+  background-size: 35%;
+}*/
+  /*.form_div{
+    margin-top:5vh;
+}
+
+h2{
+    font-weight:500;
+    font-size:20px;
+}
+
+input {
+  margin:10px 0; 
+  padding: 10px;
+  border-color: rgb(148, 148, 148, .0);
+  border-radius:5px;
+  
+}
+
+.onlyInput{
+    width:100%
+}
+
+//promocode start
+.promoMain{
+    align-items:center;
+}
+
+.inpDiv{
+    width:70%;
+}
+.btnDiv{   
+    width:30%;
+}
+
+.inpDiv input{
+    width:100%;
+}
+.btnDiv button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2D68FB;
+  border: none;
+  color: white;
+  border: 1px solid #2D68FB;
+}
+//promocode end
+
+
+.wallet_img{
+    width:40px;
+}
+
+//confirm button
+.btn {
+  width: 100%;
+  padding: 10px 50px;
+  background-color: #00c86c;
+  margin: 10px 0;
+  color:white;
+}
+
+.timer{
+    width:40px;
+    margin-right:15px;
+}
+
+.step_1,step_2{
+    width:50%;
+    align-items:center;
+}
+
+.step-main{
+    align-items:center;
+}
+.step-input{
+    width:80%;
+}
+.step-tab {
+  //border: 1px solid rgb(148, 148, 148, .1);
+  width: 20%;
+  margin-right:1px;
+  //padding:9px 0;
+}
+.step-tab a {
+  width: 100%;
+  //padding:0 10px
+}
+
+.step-input > input{
+  width: 100%;
+}
+
+::ng-deep .mat-checkbox-ripple .mat-ripple-element {
+  background-color: #00c86c !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #00c86c !important;
+}
+
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #00c86c !important;
+}
+
+
+
+.aggree{
+    font-size:10px;
+}
+
+
+.matMenuImg{
+width:25px;
+margin-right:5px;
+}
+
+
+.wType {
+  
+  text-decoration: none;
+
+}
+
+.aggreeSubmit {
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .inputWithBtn {
+    width: 70%;
+  }
+  .inputValues{
+      width:70%;
+  }
+  .steps > div {
+    width: 100%;
+  }
+
+  .bg-form {
+    width: 100%;
+    height: 100%;
+    background: none;
+    background-size: 0;
+    padding: 0 0;
+  }
+  .info_div{
+      margin:20px 0 0 0;
+  }
+  .all {
+    //border: 1px solid red;
+    border-radius: 0;
+    width: 100%;
+    margin: 0;
+    background: rgb(0,0,0,.0);
+    padding: 20px;
+    box-shadow: none;
+  }
+
+  input {
+    border-color: rgb(148, 148, 148, .1);
+  }
+
+  .info_div{
+      font-size:20px;
+  }
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}*/
+
+  /* Firefox */
+  /*input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+.collapse a{
+   //background-color:red;
+   //width:100%;
+   margin-top:50px;
+   font-size:20px;
+   text-decoration:none;
+   cursor:pointer;
+}*/
+
+

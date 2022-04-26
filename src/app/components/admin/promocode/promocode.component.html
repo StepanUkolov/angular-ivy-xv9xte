@@ -1,0 +1,53 @@
+<div class="all-center">
+
+<div class="main-table-add-btn">
+  <button class="add-btn-table" routerLink="/admin/promo/create">
+    Create new promocode
+  </button>
+  <table mat-table [dataSource]="promocodes" class="w-100">
+    <ng-container matColumnDef="index">
+      <tr>
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+      </tr>
+    </ng-container>
+    <ng-container matColumnDef="code">
+      <tr>
+        <th mat-header-cell *matHeaderCellDef> Code </th>
+        <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+      </tr>
+    </ng-container>
+    <ng-container matColumnDef="activeFrom">
+      <tr>
+        <th mat-header-cell *matHeaderCellDef> Active from </th>
+        <td mat-cell *matCellDef="let element">{{element.activeFrom}}</td>
+      </tr>
+    </ng-container>
+    <ng-container matColumnDef="bonus">
+      <tr>
+        <th mat-header-cell *matHeaderCellDef> Bonus </th>
+        <td mat-cell *matCellDef="let element">{{element.bonus}}</td>
+      </tr>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <tr>
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button
+                  (click)="delete(element.id)">
+            <mat-icon aria-hidden="false" style="color:red">delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+
+
+</div>
+</div>

@@ -1,0 +1,11 @@
+.walletDiv
+{
+    width:300px;
+    overflow-wrap:break-word;
+}
+@media only screen and (max-width: 600px) {
+  .walletDiv {
+    width: 100px;
+  }
+
+}

@@ -1,0 +1,7 @@
+<div class="container">
+<div *ngIf="userRoles|async as userRolesAsync">
+    <h1> your roles :
+     <span *ngFor="let role of userRolesAsync">{{role}}, </span>
+    </h1>
+</div>
+</div>

@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg navStyle">
+<a [routerLink]="['']" class="navbar-brand logo_text"><img class="logo_img" src="../../../assets/icons/logo.svg" alt="Alternate Text" /> {{info?.siteName}}</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+ <mat-icon>menu</mat-icon> 
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav mr-auto">
+    <!--<li class="nav-item">
+  <a class="nav-link" href="/api" target="_blank">API</a>
+</li>-->
+    <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+      <a class="nav-link" [routerLink]="['rules']">EXCHANGE RULES</a>
+    </li>
+    <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+      <a class="nav-link" [routerLink]="['about-us']">ABOUT US</a>
+    </li>
+
+    <!--<li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+  <a class="nav-link">FAQ</a>
+</li>
+
+<li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+  <a class="nav-link">CONTACTS</a>
+</li>-->
+
+    <li *ngIf="identityService.isInRole('admin')">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+          <a class="nav-link" [routerLink]="['/admin/promo']">Promocodes</a>
+        </li>
+
+        <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+          <a class="nav-link" [routerLink]="['/admin/blockWallet']">Blocked wallets</a>
+        </li>
+
+
+        <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+          <a class="nav-link" [routerLink]="['/admin/wallets']">Wallets</a>
+        </li>
+
+        <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+          <a class="nav-link" [routerLink]="['/admin/password']">Change Password</a>
+        </li>
+        <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+          <a class="nav-link" [routerLink]="['/admin/settings']">Settings</a>
+        </li>
+
+
+        <li class="nav-item" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+          <a class="nav-link" [routerLink]="" (click)="signOut()">Logout</a>
+        </li>
+      </ul>
+
+    </li>
+
+
+  </ul>
+
+</div>
+</nav>
+
+
+
