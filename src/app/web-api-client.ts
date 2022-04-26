@@ -7,8 +7,8 @@
 //----------------------
 // ReSharper disable InconsistentNaming
 
-import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 'rxjs/operators';
-import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
+import { mergeMap, catchError } from 'rxjs/operators';
+import { Observable, throwError, of } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
 
@@ -51,17 +51,17 @@ export class AdminWalletClient implements IAdminWalletClient {
             })
         };
 
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("post", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processCreate(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processCreate(<any>response_);
                 } catch (e) {
-                    return <Observable<Result>><any>_observableThrow(e);
+                    return <Observable<Result>><any>throwError(e);
                 }
             } else
-                return <Observable<Result>><any>_observableThrow(response_);
+                return <Observable<Result>><any>throwError(response_);
         }));
     }
 
@@ -73,25 +73,25 @@ export class AdminWalletClient implements IAdminWalletClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result400: any = null;
             let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result400 = ValidationProblemDetails.fromJS(resultData400);
             return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             }));
         } else if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = Result.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Result>(<any>null);
+        return of<Result>(<any>null);
     }
 
     update(command: UpdateAdminWalletCommand): Observable<Result> {
@@ -110,17 +110,17 @@ export class AdminWalletClient implements IAdminWalletClient {
             })
         };
 
-        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("put", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processUpdate(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processUpdate(<any>response_);
                 } catch (e) {
-                    return <Observable<Result>><any>_observableThrow(e);
+                    return <Observable<Result>><any>throwError(e);
                 }
             } else
-                return <Observable<Result>><any>_observableThrow(response_);
+                return <Observable<Result>><any>throwError(response_);
         }));
     }
 
@@ -132,18 +132,18 @@ export class AdminWalletClient implements IAdminWalletClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = Result.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Result>(<any>null);
+        return of<Result>(<any>null);
     }
 
     getAll(): Observable<AdminWalletDTO[]> {
@@ -158,17 +158,17 @@ export class AdminWalletClient implements IAdminWalletClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGetAll(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<AdminWalletDTO[]>><any>_observableThrow(e);
+                    return <Observable<AdminWalletDTO[]>><any>throwError(e);
                 }
             } else
-                return <Observable<AdminWalletDTO[]>><any>_observableThrow(response_);
+                return <Observable<AdminWalletDTO[]>><any>throwError(response_);
         }));
     }
 
@@ -180,7 +180,7 @@ export class AdminWalletClient implements IAdminWalletClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             if (Array.isArray(resultData200)) {
@@ -188,14 +188,14 @@ export class AdminWalletClient implements IAdminWalletClient {
                 for (let item of resultData200)
                     result200!.push(AdminWalletDTO.fromJS(item));
             }
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<AdminWalletDTO[]>();
+        return of<AdminWalletDTO[]>();
     }
 
     getById(id: string): Observable<AdminWalletDTO> {
@@ -213,17 +213,17 @@ export class AdminWalletClient implements IAdminWalletClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGetById(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGetById(<any>response_);
                 } catch (e) {
-                    return <Observable<AdminWalletDTO>><any>_observableThrow(e);
+                    return <Observable<AdminWalletDTO>><any>throwError(e);
                 }
             } else
-                return <Observable<AdminWalletDTO>><any>_observableThrow(response_);
+                return <Observable<AdminWalletDTO>><any>throwError(response_);
         }));
     }
 
@@ -235,18 +235,18 @@ export class AdminWalletClient implements IAdminWalletClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = AdminWalletDTO.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<AdminWalletDTO>(<any>null);
+        return of<AdminWalletDTO>(<any>null);
     }
 
     getByType(type: string | null): Observable<AdminWalletDTO> {
@@ -264,17 +264,17 @@ export class AdminWalletClient implements IAdminWalletClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGetByType(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGetByType(<any>response_);
                 } catch (e) {
-                    return <Observable<AdminWalletDTO>><any>_observableThrow(e);
+                    return <Observable<AdminWalletDTO>><any>throwError(e);
                 }
             } else
-                return <Observable<AdminWalletDTO>><any>_observableThrow(response_);
+                return <Observable<AdminWalletDTO>><any>throwError(response_);
         }));
     }
 
@@ -286,18 +286,18 @@ export class AdminWalletClient implements IAdminWalletClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = AdminWalletDTO.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<AdminWalletDTO>(<any>null);
+        return of<AdminWalletDTO>(<any>null);
     }
 }
 
@@ -337,17 +337,17 @@ export class BlockedWalletClient implements IBlockedWalletClient {
             })
         };
 
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("post", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processCreate(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processCreate(<any>response_);
                 } catch (e) {
-                    return <Observable<Result>><any>_observableThrow(e);
+                    return <Observable<Result>><any>throwError(e);
                 }
             } else
-                return <Observable<Result>><any>_observableThrow(response_);
+                return <Observable<Result>><any>throwError(response_);
         }));
     }
 
@@ -359,25 +359,25 @@ export class BlockedWalletClient implements IBlockedWalletClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result400: any = null;
             let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result400 = ValidationProblemDetails.fromJS(resultData400);
             return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             }));
         } else if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = Result.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Result>(<any>null);
+        return of<Result>(<any>null);
     }
 
     getAll(): Observable<BlockedWalletDTO[]> {
@@ -392,17 +392,17 @@ export class BlockedWalletClient implements IBlockedWalletClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGetAll(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<BlockedWalletDTO[]>><any>_observableThrow(e);
+                    return <Observable<BlockedWalletDTO[]>><any>throwError(e);
                 }
             } else
-                return <Observable<BlockedWalletDTO[]>><any>_observableThrow(response_);
+                return <Observable<BlockedWalletDTO[]>><any>throwError(response_);
         }));
     }
 
@@ -414,7 +414,7 @@ export class BlockedWalletClient implements IBlockedWalletClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             if (Array.isArray(resultData200)) {
@@ -422,14 +422,14 @@ export class BlockedWalletClient implements IBlockedWalletClient {
                 for (let item of resultData200)
                     result200!.push(BlockedWalletDTO.fromJS(item));
             }
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<BlockedWalletDTO[]>();
+        return of<BlockedWalletDTO[]>();
     }
 
     getByWallet(wallet: string | null): Observable<boolean> {
@@ -447,17 +447,17 @@ export class BlockedWalletClient implements IBlockedWalletClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGetByWallet(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGetByWallet(<any>response_);
                 } catch (e) {
-                    return <Observable<boolean>><any>_observableThrow(e);
+                    return <Observable<boolean>><any>throwError(e);
                 }
             } else
-                return <Observable<boolean>><any>_observableThrow(response_);
+                return <Observable<boolean>><any>throwError(response_);
         }));
     }
 
@@ -469,18 +469,18 @@ export class BlockedWalletClient implements IBlockedWalletClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = resultData200 !== undefined ? resultData200 : <any>null;
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<boolean>(<any>null);
+        return of<boolean>(<any>null);
     }
 
     delete(id: string): Observable<Result> {
@@ -498,17 +498,17 @@ export class BlockedWalletClient implements IBlockedWalletClient {
             })
         };
 
-        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("delete", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processDelete(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<Result>><any>_observableThrow(e);
+                    return <Observable<Result>><any>throwError(e);
                 }
             } else
-                return <Observable<Result>><any>_observableThrow(response_);
+                return <Observable<Result>><any>throwError(response_);
         }));
     }
 
@@ -520,18 +520,18 @@ export class BlockedWalletClient implements IBlockedWalletClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = Result.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Result>(<any>null);
+        return of<Result>(<any>null);
     }
 }
 
@@ -569,17 +569,17 @@ export class GeneralSettingClient implements IGeneralSettingClient {
             })
         };
 
-        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("put", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processUpdate(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processUpdate(<any>response_);
                 } catch (e) {
-                    return <Observable<Result>><any>_observableThrow(e);
+                    return <Observable<Result>><any>throwError(e);
                 }
             } else
-                return <Observable<Result>><any>_observableThrow(response_);
+                return <Observable<Result>><any>throwError(response_);
         }));
     }
 
@@ -591,25 +591,25 @@ export class GeneralSettingClient implements IGeneralSettingClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result400: any = null;
             let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result400 = ValidationProblemDetails.fromJS(resultData400);
             return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             }));
         } else if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = Result.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Result>(<any>null);
+        return of<Result>(<any>null);
     }
 
     get(): Observable<GeneralSettingDTO> {
@@ -624,17 +624,17 @@ export class GeneralSettingClient implements IGeneralSettingClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGet(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGet(<any>response_);
                 } catch (e) {
-                    return <Observable<GeneralSettingDTO>><any>_observableThrow(e);
+                    return <Observable<GeneralSettingDTO>><any>throwError(e);
                 }
             } else
-                return <Observable<GeneralSettingDTO>><any>_observableThrow(response_);
+                return <Observable<GeneralSettingDTO>><any>throwError(response_);
         }));
     }
 
@@ -646,18 +646,18 @@ export class GeneralSettingClient implements IGeneralSettingClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = GeneralSettingDTO.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<GeneralSettingDTO>(<any>null);
+        return of<GeneralSettingDTO>(<any>null);
     }
 }
 
@@ -699,17 +699,17 @@ export class IdentityClient implements IIdentityClient {
             })
         };
 
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("post", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processSignUp(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processSignUp(<any>response_);
                 } catch (e) {
-                    return <Observable<AuthResponse>><any>_observableThrow(e);
+                    return <Observable<AuthResponse>><any>throwError(e);
                 }
             } else
-                return <Observable<AuthResponse>><any>_observableThrow(response_);
+                return <Observable<AuthResponse>><any>throwError(response_);
         }));
     }
 
@@ -721,18 +721,18 @@ export class IdentityClient implements IIdentityClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = AuthResponse.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<AuthResponse>(<any>null);
+        return of<AuthResponse>(<any>null);
     }
 
     signIn(command: SignInCommand): Observable<FileResponse> {
@@ -751,17 +751,17 @@ export class IdentityClient implements IIdentityClient {
             })
         };
 
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("post", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processSignIn(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processSignIn(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
+                    return <Observable<FileResponse>><any>throwError(e);
                 }
             } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
+                return <Observable<FileResponse>><any>throwError(response_);
         }));
     }
 
@@ -776,13 +776,13 @@ export class IdentityClient implements IIdentityClient {
             const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
             const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
             const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+            return of({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse>(<any>null);
+        return of<FileResponse>(<any>null);
     }
 
     signOut(userId: string | null): Observable<AuthResponse> {
@@ -800,17 +800,17 @@ export class IdentityClient implements IIdentityClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processSignOut(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processSignOut(<any>response_);
                 } catch (e) {
-                    return <Observable<AuthResponse>><any>_observableThrow(e);
+                    return <Observable<AuthResponse>><any>throwError(e);
                 }
             } else
-                return <Observable<AuthResponse>><any>_observableThrow(response_);
+                return <Observable<AuthResponse>><any>throwError(response_);
         }));
     }
 
@@ -822,18 +822,18 @@ export class IdentityClient implements IIdentityClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = AuthResponse.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<AuthResponse>(<any>null);
+        return of<AuthResponse>(<any>null);
     }
 
     changePassword(userId: string | null, newPassword: string | null): Observable<AuthResponse> {
@@ -854,17 +854,17 @@ export class IdentityClient implements IIdentityClient {
             })
         };
 
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("post", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processChangePassword(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processChangePassword(<any>response_);
                 } catch (e) {
-                    return <Observable<AuthResponse>><any>_observableThrow(e);
+                    return <Observable<AuthResponse>><any>throwError(e);
                 }
             } else
-                return <Observable<AuthResponse>><any>_observableThrow(response_);
+                return <Observable<AuthResponse>><any>throwError(response_);
         }));
     }
 
@@ -876,18 +876,18 @@ export class IdentityClient implements IIdentityClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = AuthResponse.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<AuthResponse>(<any>null);
+        return of<AuthResponse>(<any>null);
     }
 
     renewTokens(): Observable<string> {
@@ -902,17 +902,17 @@ export class IdentityClient implements IIdentityClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processRenewTokens(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processRenewTokens(<any>response_);
                 } catch (e) {
-                    return <Observable<string>><any>_observableThrow(e);
+                    return <Observable<string>><any>throwError(e);
                 }
             } else
-                return <Observable<string>><any>_observableThrow(response_);
+                return <Observable<string>><any>throwError(response_);
         }));
     }
 
@@ -924,18 +924,18 @@ export class IdentityClient implements IIdentityClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = resultData200 !== undefined ? resultData200 : <any>null;
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<string>(<any>null);
+        return of<string>(<any>null);
     }
 
     getRoles(userId: string | null): Observable<string[]> {
@@ -953,17 +953,17 @@ export class IdentityClient implements IIdentityClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGetRoles(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGetRoles(<any>response_);
                 } catch (e) {
-                    return <Observable<string[]>><any>_observableThrow(e);
+                    return <Observable<string[]>><any>throwError(e);
                 }
             } else
-                return <Observable<string[]>><any>_observableThrow(response_);
+                return <Observable<string[]>><any>throwError(response_);
         }));
     }
 
@@ -975,7 +975,7 @@ export class IdentityClient implements IIdentityClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             if (Array.isArray(resultData200)) {
@@ -983,14 +983,14 @@ export class IdentityClient implements IIdentityClient {
                 for (let item of resultData200)
                     result200!.push(item);
             }
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<string[]>();
+        return of<string[]>();
     }
 }
 
@@ -1029,17 +1029,17 @@ export class OrderClient implements IOrderClient {
             })
         };
 
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("post", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processCreateOrder(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processCreateOrder(<any>response_);
                 } catch (e) {
-                    return <Observable<string>><any>_observableThrow(e);
+                    return <Observable<string>><any>throwError(e);
                 }
             } else
-                return <Observable<string>><any>_observableThrow(response_);
+                return <Observable<string>><any>throwError(response_);
         }));
     }
 
@@ -1051,18 +1051,18 @@ export class OrderClient implements IOrderClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = resultData200 !== undefined ? resultData200 : <any>null;
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<string>(<any>null);
+        return of<string>(<any>null);
     }
 
     get(): Observable<Order[]> {
@@ -1077,17 +1077,17 @@ export class OrderClient implements IOrderClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGet(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGet(<any>response_);
                 } catch (e) {
-                    return <Observable<Order[]>><any>_observableThrow(e);
+                    return <Observable<Order[]>><any>throwError(e);
                 }
             } else
-                return <Observable<Order[]>><any>_observableThrow(response_);
+                return <Observable<Order[]>><any>throwError(response_);
         }));
     }
 
@@ -1099,7 +1099,7 @@ export class OrderClient implements IOrderClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             if (Array.isArray(resultData200)) {
@@ -1107,14 +1107,14 @@ export class OrderClient implements IOrderClient {
                 for (let item of resultData200)
                     result200!.push(Order.fromJS(item));
             }
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Order[]>();
+        return of<Order[]>();
     }
 
     getById(id: string | null | undefined): Observable<Order> {
@@ -1131,17 +1131,17 @@ export class OrderClient implements IOrderClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGetById(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGetById(<any>response_);
                 } catch (e) {
-                    return <Observable<Order>><any>_observableThrow(e);
+                    return <Observable<Order>><any>throwError(e);
                 }
             } else
-                return <Observable<Order>><any>_observableThrow(response_);
+                return <Observable<Order>><any>throwError(response_);
         }));
     }
 
@@ -1153,18 +1153,18 @@ export class OrderClient implements IOrderClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = Order.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Order>(<any>null);
+        return of<Order>(<any>null);
     }
 }
 
@@ -1204,17 +1204,17 @@ export class PromocodeClient implements IPromocodeClient {
             })
         };
 
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("post", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processCreate(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processCreate(<any>response_);
                 } catch (e) {
-                    return <Observable<Result>><any>_observableThrow(e);
+                    return <Observable<Result>><any>throwError(e);
                 }
             } else
-                return <Observable<Result>><any>_observableThrow(response_);
+                return <Observable<Result>><any>throwError(response_);
         }));
     }
 
@@ -1226,25 +1226,25 @@ export class PromocodeClient implements IPromocodeClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 400) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result400: any = null;
             let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result400 = ValidationProblemDetails.fromJS(resultData400);
             return throwException("A server side error occurred.", status, _responseText, _headers, result400);
             }));
         } else if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = Result.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Result>(<any>null);
+        return of<Result>(<any>null);
     }
 
     getAll(): Observable<PromocodeDTO[]> {
@@ -1259,17 +1259,17 @@ export class PromocodeClient implements IPromocodeClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGetAll(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<PromocodeDTO[]>><any>_observableThrow(e);
+                    return <Observable<PromocodeDTO[]>><any>throwError(e);
                 }
             } else
-                return <Observable<PromocodeDTO[]>><any>_observableThrow(response_);
+                return <Observable<PromocodeDTO[]>><any>throwError(response_);
         }));
     }
 
@@ -1281,7 +1281,7 @@ export class PromocodeClient implements IPromocodeClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             if (Array.isArray(resultData200)) {
@@ -1289,14 +1289,14 @@ export class PromocodeClient implements IPromocodeClient {
                 for (let item of resultData200)
                     result200!.push(PromocodeDTO.fromJS(item));
             }
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<PromocodeDTO[]>();
+        return of<PromocodeDTO[]>();
     }
 
     getByCode(code: string | null): Observable<PromocodeDTO> {
@@ -1314,17 +1314,17 @@ export class PromocodeClient implements IPromocodeClient {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("get", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processGetByCode(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processGetByCode(<any>response_);
                 } catch (e) {
-                    return <Observable<PromocodeDTO>><any>_observableThrow(e);
+                    return <Observable<PromocodeDTO>><any>throwError(e);
                 }
             } else
-                return <Observable<PromocodeDTO>><any>_observableThrow(response_);
+                return <Observable<PromocodeDTO>><any>throwError(response_);
         }));
     }
 
@@ -1336,18 +1336,18 @@ export class PromocodeClient implements IPromocodeClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = PromocodeDTO.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<PromocodeDTO>(<any>null);
+        return of<PromocodeDTO>(<any>null);
     }
 
     delete(id: string): Observable<Result> {
@@ -1365,17 +1365,17 @@ export class PromocodeClient implements IPromocodeClient {
             })
         };
 
-        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return this.http.request("delete", url_, options_).pipe(mergeMap((response_ : any) => {
             return this.processDelete(response_);
-        })).pipe(_observableCatch((response_: any) => {
+        })).pipe(catchError((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
                     return this.processDelete(<any>response_);
                 } catch (e) {
-                    return <Observable<Result>><any>_observableThrow(e);
+                    return <Observable<Result>><any>throwError(e);
                 }
             } else
-                return <Observable<Result>><any>_observableThrow(response_);
+                return <Observable<Result>><any>throwError(response_);
         }));
     }
 
@@ -1387,18 +1387,18 @@ export class PromocodeClient implements IPromocodeClient {
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = Result.fromJS(resultData200);
-            return _observableOf(result200);
+            return of(result200);
             }));
         } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return blobToText(responseBlob).pipe(mergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Result>(<any>null);
+        return of<Result>(<any>null);
     }
 }
 
@@ -2528,9 +2528,9 @@ export class SwaggerException extends Error {
 
 function throwException(message: string, status: number, response: string, headers: { [key: string]: any; }, result?: any): Observable<any> {
     if (result !== null && result !== undefined)
-        return _observableThrow(result);
+        return throwError(result);
     else
-        return _observableThrow(new SwaggerException(message, status, response, headers, null));
+        return throwError(new SwaggerException(message, status, response, headers, null));
 }
 
 function blobToText(blob: any): Observable<string> {
