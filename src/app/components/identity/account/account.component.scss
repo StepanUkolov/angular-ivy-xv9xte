@@ -1,5 +1,3 @@
-@import "variables";
-
 h1 {
   margin: 0 auto 20px;
 }
@@ -8,7 +6,6 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .form {
@@ -20,11 +17,11 @@ h1 {
   padding: 20px;
 
   .label {
-    color: lighten($text-primary, 20);
+    color: lighten(#222222, 20);
   }
 
   .icon-showPassword {
-    color: lighten($text-primary, 20);
+    color: lighten(#222222, 20);
     cursor: pointer;
   }
 
