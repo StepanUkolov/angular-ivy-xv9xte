@@ -195,7 +195,7 @@ export class AdminWalletClient implements IAdminWalletClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<AdminWalletDTO[]>(<any>null);
+        return _observableOf<AdminWalletDTO[]>();
     }
 
     getById(id: string): Observable<AdminWalletDTO> {
@@ -429,7 +429,7 @@ export class BlockedWalletClient implements IBlockedWalletClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<BlockedWalletDTO[]>(<any>null);
+        return _observableOf<BlockedWalletDTO[]>();
     }
 
     getByWallet(wallet: string | null): Observable<boolean> {
@@ -990,7 +990,7 @@ export class IdentityClient implements IIdentityClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<string[]>(<any>null);
+        return _observableOf<string[]>();
     }
 }
 
@@ -1114,7 +1114,7 @@ export class OrderClient implements IOrderClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<Order[]>(<any>null);
+        return _observableOf<Order[]>();
     }
 
     getById(id: string | null | undefined): Observable<Order> {
@@ -1296,7 +1296,7 @@ export class PromocodeClient implements IPromocodeClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<PromocodeDTO[]>(<any>null);
+        return _observableOf<PromocodeDTO[]>();
     }
 
     getByCode(code: string | null): Observable<PromocodeDTO> {
@@ -1477,7 +1477,7 @@ export class ValidationProblemDetails extends ProblemDetails implements IValidat
         super(data);
     }
 
-    init(_data?: any) {
+    override init(_data?: any) {
         super.init(_data);
         if (_data) {
             if (_data["errors"]) {
@@ -1490,14 +1490,14 @@ export class ValidationProblemDetails extends ProblemDetails implements IValidat
         }
     }
 
-    static fromJS(data: any): ValidationProblemDetails {
+    static override fromJS(data: any): ValidationProblemDetails {
         data = typeof data === 'object' ? data : {};
         let result = new ValidationProblemDetails();
         result.init(data);
         return result;
     }
 
-    toJSON(data?: any) {
+    override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         if (this.errors) {
             data["errors"] = {};
@@ -2097,18 +2097,18 @@ export class IdentityUser extends IdentityUserOfString implements IIdentityUser 
         super(data);
     }
 
-    init(_data?: any) {
+    override init(_data?: any) {
         super.init(_data);
     }
 
-    static fromJS(data: any): IdentityUser {
+    static override fromJS(data: any): IdentityUser {
         data = typeof data === 'object' ? data : {};
         let result = new IdentityUser();
         result.init(data);
         return result;
     }
 
-    toJSON(data?: any) {
+    override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         super.toJSON(data);
         return data; 
@@ -2133,7 +2133,7 @@ export class ApplicationUser extends IdentityUser implements IApplicationUser {
         super(data);
     }
 
-    init(_data?: any) {
+    override init(_data?: any) {
         super.init(_data);
         if (_data) {
             if (Array.isArray(_data["refreshTokens"])) {
@@ -2152,14 +2152,14 @@ export class ApplicationUser extends IdentityUser implements IApplicationUser {
         }
     }
 
-    static fromJS(data: any): ApplicationUser {
+    static override fromJS(data: any): ApplicationUser {
         data = typeof data === 'object' ? data : {};
         let result = new ApplicationUser();
         result.init(data);
         return result;
     }
 
-    toJSON(data?: any) {
+    override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         if (Array.isArray(this.refreshTokens)) {
             data["refreshTokens"] = [];
@@ -2503,7 +2503,7 @@ export interface FileResponse {
 }
 
 export class SwaggerException extends Error {
-    message: string;
+    override message: string;
     status: number;
     response: string;
     headers: { [key: string]: any; };

@@ -78,10 +78,10 @@ export class IdentityService {
     this.stopRefreshTokenTimer()
 
     return this.identityClient.signOut(userId).pipe(
-      catchError((error) => {
-        this.loading = false;
-        return throwError(error);
-      })
+        catchError((error) => {
+          this.loading = false;
+          return throwError(error);
+        })
       );
     }
 

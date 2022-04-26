@@ -70,15 +70,12 @@ export function initializeApp1(appInitService: AppInitService) {
     MatButtonModule,
     MaterialModules,
     ReactiveFormsModule,
-    
+    QRCodeModule,
     AdminModule,
     CdTimerModule,
     ClipboardModule,
     MatDialogModule,
     CountdownModule
-  ],
-  declarations: [
-    QRCodeModule
   ],
   entryComponents: [
     ConfirmComponent
