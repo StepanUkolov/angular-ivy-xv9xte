@@ -49,7 +49,6 @@ export function initializeApp1(appInitService: AppInitService) {
     HomeComponent,
     FooterComponent,
     BaseComponent,
-    //SupportChatComponent,
     FooterComponent,
     PaymentComponent,
     RulesComponent,
@@ -73,11 +72,13 @@ export function initializeApp1(appInitService: AppInitService) {
     ReactiveFormsModule,
     
     AdminModule,
-    QRCodeModule,
     CdTimerModule,
     ClipboardModule,
     MatDialogModule,
     CountdownModule
+  ],
+  declarations: [
+    QRCodeModule
   ],
   entryComponents: [
     ConfirmComponent
